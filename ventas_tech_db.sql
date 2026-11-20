@@ -10,46 +10,47 @@ DROP TABLE IF EXISTS ventas;
 DROP TABLE IF EXISTS productos;
 DROP TABLE IF EXISTS clientes;
 DROP TABLE IF EXISTS categorias;
-
+GO
 -- =============================================
 -- SECCIÓN 2: CREATE TABLES
 -- =============================================
 CREATE TABLE Categorias(
 id_categoria INT PRIMARY KEY,
 nombre_categoria varchar(50) not null, 
-descripcion VARCHAR(200),
+descripcion VARCHAR(200)
 );
 CREATE TABLE Clientes(
 id_cliente INT PRIMARY KEY, 
 nombre VARCHAR(100) NOT NULL,
 email VARCHAR(100) UNIQUE,
 ciudad VARCHAR(50),
-fecha_registro DATE NOT NULL,
+fecha_registro DATE NOT NULL
 );
 CREATE TABLE Productos(
 id_producto INT PRIMARY KEY,
 nombre_producto VARCHAR(100) NOT NULL,
 id_categoria INT FOREIGN KEY REFERENCES categorias(id_categoria),
-precio DECIMAL(10,2),
+precio DECIMAL(10,2) NOT NULL,
 STOCK INT DEFAULT 0,
-activo BIT DEFAULT 1, 
+activo BIT DEFAULT 1 
 );
 CREATE TABLE Ventas(
-id_ventas INT PRIMARY KEY,
+id_venta INT PRIMARY KEY,
 id_cliente INT FOREIGN KEY REFERENCES clientes(id_cliente),
 id_producto INT FOREIGN KEY REFERENCES Productos(id_producto),
 cantidad INT NOT NULL,
 precio_unitario DECIMAL(10,2) NOT NULL,
-fecha_venta DATE NOT NULL,
+fecha_venta DATE NOT NULL
 );
+GO
 -- =============================================
 -- SECCIÓN 3: INSERT DATA
 -- =============================================
 INSERT INTO Categorias (id_categoria, nombre_categoria, descripcion) VALUES
-(1,'Computacion','laptops, PCs y monitores'),
-(2, 'Accesorios', 'perifericos y complementos'),
-(3,'Audio', 'auriculares y parlantes'),
-(4,'Almacenamiento', 'discos y  memorias');
+(1,'Computación','Laptops, PCs y monitores'),
+(2, 'Accesorios', 'Periféricos y complementos'),
+(3,'Audio', 'Auriculares y parlantes'),
+(4,'Almacenamiento', 'Discos y  memorias');
 INSERT INTO clientes (id_cliente, nombre, email, ciudad, fecha_registro) VALUES
   (1, 'María López',  'maria@mail.com',  'Buenos Aires', '2024-01-05'),
   (2, 'Carlos Ruiz',  'carlos@mail.com', 'Córdoba',      '2024-01-10'),
@@ -62,8 +63,8 @@ INSERT INTO clientes (id_cliente, nombre, email, ciudad, fecha_registro) VALUES
   (3, 'Monitor 4K 27',      1,  450.00, 12, 1),
   (4, 'Auriculares BT Pro', 3,  120.00, 35, 1),
   (5, 'SSD Externo 1TB',    4,  130.00, 18, 1),
-  (6, 'Teclado Mecanico',2, 95.00, 40, 1);
-  INSERT INTO ventas (id_ventas, id_cliente, id_producto, cantidad, precio_unitario, fecha_venta) VALUES
+  (6, 'Teclado Mecánico',2, 95.00, 40, 1);
+  INSERT INTO ventas (id_venta, id_cliente, id_producto, cantidad, precio_unitario, fecha_venta) VALUES
   ( 1, 1, 1, 2, 1200.00, '2024-03-05'),
   ( 2, 2, 2, 5,   28.00, '2024-03-06'),
   ( 3, 3, 3, 1,  450.00, '2024-03-07'),
@@ -74,12 +75,12 @@ INSERT INTO clientes (id_cliente, nombre, email, ciudad, fecha_registro) VALUES
   ( 8, 3, 2, 8,   28.00, '2024-03-13'),
   ( 9, 4, 4, 1,  120.00, '2024-03-14'),
   (10, 5, 3, 2,  450.00, '2024-03-15');
-  
+  GO
 -- =============================================
 -- SECCIÓN 4: VALIDACIÓN
 -- =============================================
 
-  SELECT*FROM categorias
-  SELECT*FROM clientes
-  SELECT*FROM productos
-  SELECT*FROM ventas
+  SELECT * FROM categorias;
+  SELECT * FROM clientes;
+  SELECT * FROM productos;
+  SELECT * FROM ventas;
